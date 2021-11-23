@@ -1,7 +1,7 @@
 .footer {
     background-color: #292929;
     flex-direction: column;
-    margin-top: 20px;
+    /* margin-top: 20px; */
     padding: 30px 0 0 0;
 }
 .footer-logo {
@@ -64,6 +64,9 @@
 @media screen and (min-width: 1200px) {
     .footer > .container {
         padding: 30px 5vw 60px 5vw;
+    }
+    .footer ul {
+        text-align: left;
     }
     .footer p {
         padding: 5px 0;

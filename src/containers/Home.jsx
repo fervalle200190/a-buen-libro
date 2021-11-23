@@ -52,47 +52,47 @@ export default function Home () {
     console.log(categoryButton())
     return (
         <React.Fragment>
-        <header className="home-header full-width">
-            <div className="container">
-                <div className="home-hero-info black-bkg flex jus-algn-center white">
-                    <div className="relative">
-                        <h2 className="outline white absolute">Encuentra tu libro</h2>
-                        <h2 className="titles">
-                            Entérate de los buenos libros y forja mejores lectores
-                        </h2>
+            <header className="home-header full-width">
+                <div className="container">
+                    <div className="home-hero-info black-bkg flex jus-algn-center white">
+                        <div className="relative">
+                            <h2 className="outline white absolute">Encuentra tu libro</h2>
+                            <h2 className="titles">
+                                Entérate de los buenos libros y forja mejores lectores
+                            </h2>
+                        </div>
+                        <div className="flex space-between">
+                            {categoryButton()}
+                        </div>
                     </div>
-                    <div className="flex space-between">
-                        {categoryButton()}
-                    </div>
+                    <img className="home-hero-img" src={heroImg} alt="Abuelo leyendo con nieto" />
                 </div>
-                <img className="home-hero-img" src={heroImg} alt="Abuelo leyendo con nieto" />
-            </div>
-        </header>
-        <section className="section black-bkg left-padding mot">
-            <div className="container motiv">
-                <h2 className="titles white">
-                    ¿Por qué es importante forjar lectores motivados?
-                </h2>
-                <div className="flex">                
-                    <div className="flex jus-algn-center motivation">
-                        <div className="flex jus-algn-center column white center-text">
-                            <img src={time} alt="" />
-                            <p>Porque la motivación lectora predice frecuencia de lectura</p>
+            </header>
+            <section className="section black-bkg left-padding mot">
+                    <div className="flex">
+                        <div className="motivation-texts">
+                            <h2 className="titles white">
+                                ¿Por qué es importante forjar lectores motivados?
+                            </h2>
+                            <div className="flex jus-algn-center motivation">
+                                <div className="flex jus-algn-center column white center-text">
+                                    <img src={time} alt="" />
+                                    <p>Porque la motivación lectora predice frecuencia de lectura</p>
+                                </div>
+                                <div className="flex jus-algn-center column white center-text">
+                                    <img src={eye} alt="" />
+                                    <p>Porque la motivación lectora predice comprensión de lectura</p>
+                                </div>
+                                <div className="flex jus-algn-center column white center-text">
+                                    <img src={balance} alt="" />
+                                    <p>Porque  la motivación lectora puede mitigar el efecto que la pobreza tiene sobre el desempeño académico</p>
+                                </div>
+                            </div>
                         </div>
-                        <div className="flex jus-algn-center column white center-text">
-                            <img src={eye} alt="" />
-                            <p>Porque la motivación lectora predice comprensión de lectura</p>
-                        </div>
-                        <div className="flex jus-algn-center column white center-text">
-                            <img src={balance} alt="" />
-                            <p>Porque  la motivación lectora puede mitigar el efecto que la pobreza tiene sobre el desempeño académico</p>
-                        </div>
+                        <img src={kid} alt="" />
                     </div>
-                    <img src={kid} alt="" />
-                </div>
-            </div>
-        </section>
-        <Footer />
+            </section>
+            <Footer />
         </React.Fragment>
     )
 }
