@@ -49,7 +49,6 @@ export default function Home () {
         return buttons
     }
     
-    console.log(categoryButton())
     return (
         <React.Fragment>
             <header className="home-header full-width">

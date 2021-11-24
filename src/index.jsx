@@ -4,9 +4,54 @@ import './index.css'
 import App from './App'
 import reportWebVitals from './reportWebVitals'
 
+import {
+  ApolloClient,
+  InMemoryCache,
+  ApolloProvider,
+  // useQuery,
+  gql,
+  HttpLink,
+  from,
+} from '@apollo/client'
+import {onError} from '@apollo/client/link/error'
+
+const errorLink = onError (({ graphqlErrors }) => {
+  if (graphqlErrors) {
+    graphqlErrors.map(({message}) => {
+      alert(`Graphql error ${message}`)
+    })
+  }
+})
+const link = from([
+  errorLink,
+  new HttpLink({uri: 'http://127.0.0.1:8000/graphql', withCredentials: true})
+])
+
+const client = new ApolloClient({
+  // uri: 'http://localhost:8000/graphql',
+  cache: new InMemoryCache(),
+  link: link,
+  fetchOptions: {
+    mode: 'no-cors',
+  },
+})
+// console.log(client.query)
+
+client.query({
+  query: gql`
+    query hello {
+      hello
+    }
+  `
+})
+.then(result => console.log(result))
+
+
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <ApolloProvider client={client}>
+      <App />
+    </ApolloProvider>
   </React.StrictMode>,
   document.getElementById('root')
 )
