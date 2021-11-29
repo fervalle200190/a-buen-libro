@@ -20,16 +20,13 @@ export default function Menu() {
             <Logo className="menu-logo"/>
             <ul className={!isOpen ? "menu" : "menu menu-show"}>
                 <li>
-                    <Link to="/">Home</Link>
+                    <Link onClick={() => setIsOpen(!isOpen)} to="/">Home</Link>
                 </li>
                 <li>
-                    <Link to="/books">Todos</Link>
+                    <Link onClick={() => setIsOpen(!isOpen)} to="/books">Todos</Link>
                 </li>
-                {/* <li>
-                    <Link to="/book">Libro</Link>
-                </li> */}
                 <li>
-                    <Link to="/us">Nosotros</Link>
+                    <Link onClick={() => setIsOpen(!isOpen)} to="/us">Nosotros</Link>
                 </li>
             </ul>
         </React.Fragment>

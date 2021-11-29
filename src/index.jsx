@@ -9,7 +9,7 @@ import {
   InMemoryCache,
   ApolloProvider,
   // useQuery,
-  gql,
+  // gql,
   HttpLink,
   from,
 } from '@apollo/client'
@@ -35,16 +35,18 @@ const client = new ApolloClient({
     mode: 'no-cors',
   },
 })
-// console.log(client.query)
 
-client.query({
-  query: gql`
-    query hello {
-      hello
-    }
-  `
-})
-.then(result => console.log(result))
+// client.query({
+//   query: gql`
+//     query bookDetail {
+//       bookDetail(ISBN: 9789563642384) {
+//         ISBN,
+//         name
+//       }
+//     }
+//   `
+// })
+// .then(result => console.log(result.data.bookDetail))
 
 
 ReactDOM.render(

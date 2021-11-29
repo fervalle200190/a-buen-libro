@@ -21,6 +21,10 @@ img {
     width: 100%;
 }
 
+.blue {
+    color: #005293;
+}
+
 .bkg-img {
     background-size: cover;
     background-position: center center;
@@ -302,6 +306,57 @@ img {
     margin-top: 50px;
 }
 
+/* BOOKS VIEW */
+
+.books-header {
+    margin-top: 60px;
+    background-position: center top;
+    padding: 30px 5vw 30px 5vw;
+    position: relative;
+}
+.books-header .container {
+    align-content: center;
+    justify-content: center;
+    display: flex;
+}
+.header-big-titles {
+    font-size: 4rem;
+    position: absolute;
+    text-align: center;
+    margin: 0;
+    top: 15px;
+}
+
+.filters {
+    padding: 0 5vw;
+}
+
+.filters-container {
+    /* width: 350px; */
+    margin: 20px auto;
+}
+.filters-container .MuiPaper-root {
+    box-shadow: none;
+}
+.css-1elwnq4-MuiPaper-root-MuiAccordion-root::before {
+    background-color: transparent !important;
+}
+.filters .MuiAccordionSummary-content > p {
+    font-size: 0.85rem;
+    color: #005293;
+}
+.MuiAccordionSummary-expandIconWrapper .expand-icon {
+    color: #005293 !important;
+}
+.MuiAccordion-region {
+    display: flex;
+    justify-content: center;
+}
+.filters-container .MuiAccordionDetails-root .MuiBox-root {
+    max-height: 200px;
+    overflow: auto;
+}
+
 @media screen and (min-width: 800px) {
     .motivation {
         flex-direction: row;
@@ -370,6 +425,15 @@ img {
     }
     .us-text {
         width: 60%;
+    }
+
+    /* BOOKS VIEW */
+    .books-header {
+        padding: 50px 5vw 50px 5vw;
+        margin-top: 90px;
+    }
+    .header-big-titles {
+        top: 30px;
     }
 }
 
@@ -507,6 +571,18 @@ img {
         left: -3.5rem;
         margin: 0;
         font-weight: 800;
+    }
+    /* BOOKS VIEW */
+    .books-header {
+        padding: 160px 7% 160px 7%;
+        margin-top: 90px;
+    }
+    .books-header .container h2 {
+        margin: 0;
+    }
+    .header-big-titles {
+        font-size: 6rem;
+        top: 6.5rem;
     }
 }
 

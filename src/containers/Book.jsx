@@ -1,5 +1,7 @@
-import React from 'react'
-// import { useParams } from 'react-router'
+import React, { useState } from 'react'
+import { useParams } from 'react-router'
+import { useQuery } from '@apollo/client'
+import {getBook} from '../graphql/queries'
 
 // Logos
 import { ReactComponent as Logos } from '../assets/menu_logos.svg'
@@ -16,7 +18,24 @@ import Footer from '../components/Footer'
 import '../styles/main.css'
 
 export default function Book () {
-    // const {name} = useParams()
+    const [book, setBook] = useState({})
+    const {ISBN} = useParams()
+    const getBooks = async () => {
+        const {loading, error, data} = useQuery(getBook, {
+            variables: {ISBN}
+        })
+        
+        if (loading) return "Loading..."
+        if (error) return "Error :("
+
+        setBook(await data.bookDetail)        
+        return data.bookDetail.name
+    }
+    getBooks()
+    // useEffect(() => {
+    // }, [])
+    console.log(book)
+    
     const score = ['Bueno', 'Muy Bueno', 'Extraordinario']
     const galleryImgs = [cover1, cover2, cover3, cover4]
 
@@ -30,12 +49,11 @@ export default function Book () {
                         <p>{score[2]}</p>
                     </div>
                     <h2 className="libro-title">
-                        {/* {name} */}
-                        ¡Alto! ¡Monstruos!
+                        {book.name}
                     </h2>
                     <div className="review">
                         <h4>Crítica:</h4>
-                        <p>Este cuento relata la historia de dos hermanas que buscan deshacerse de varios artículos, pero en el camino se encuentran con aterradores monstruos que deberán convencer para lograr pasar y conseguir su cometido. Este libro álbum cuenta la historia a través de ilustraciones llenas de colores brillantes. La historia es coherente, cautivadora y abre un espacio para la interpretación de los lectores. El texto no declara explícitamente su propósito, pero se puede interpretar que busca concientizar sobre el reciclaje. Se recomienda para niños a partir de los 3 años. </p>
+                        <p>{book.review}</p>
                     </div>
                     <div className="reviewed-by">
                         <p>Reseñado por:</p>
@@ -65,11 +83,11 @@ export default function Book () {
                         <div>
                             <h3>Especificaciones:</h3>
                             <ul>
-                                <li>ISBN: </li>
+                                <li>ISBN: {book.ISBN}</li>
                                 <li>Año de publicación: </li>
-                                <li>Ancho: </li>
-                                <li>Alto: </li>
-                                <li>Páginas: </li>
+                                <li>Ancho: {book.width}</li>
+                                <li>Alto: {book.height}</li>
+                                <li>Páginas: {book.pages}</li>
                                 <li>Tipo de encuadernación: </li>
                                 <li>Editorial: </li>
                                 <li>Colección: </li>
