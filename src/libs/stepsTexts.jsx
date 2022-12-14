@@ -8,7 +8,7 @@ const steps = [
             text: "El contenido y el formato se alinean y complementan mutuamente. Las ilustraciones, si hay, el diseño y el estilo de escritura extienden el contenido del libro. El libro presenta un tema central, pero otros subtemas relevantes e interesantes también se presentan aunque con menor profundidad."
         },
         {
-            title: "El libro es entretenido y coherente.",
+            title: "El libro es entretenido y coherente",
             text: "Si el libro cuenta una historia, la trama es coherente y cautivadora. Los eventos que ocurren se ordenan de manera impredecible, aunque su lógica es fácil de seguir. El libro mantiene al lector entretenido desde el principio hasta el final. A todos los conflictos que se introducen se les brinda cierta solución, aunque no siempre el final es feliz o completamente cerrado. El libro deja espacio para la interpretación de sus lectores. El final satisface a sus lectores. Si el libro es informativo, el contenido se cuenta en un orden lógico que contribuye a generar interés y entusiasmo y se incorporan detalles que mantienen al lector entretenido desde el principio hasta el final."
         },
         {
@@ -16,7 +16,7 @@ const steps = [
             text: "Su estilo de escritura contribuye a cumplir el propósito del libro. Las palabras que usa han sido cuidadosamente escogidas. Las descripciones y detalles permiten que los lectores se formen una imagen mental de las escenas y/o los contenidos. Cuando el libro se lee en voz alta, se percibe un ritmo y una musicalidad que es agradable de escuchar."
         },
         {
-            title: "El libro es creíble/fidedigno",
+            title: "El libro es verosímil y fidedigno",
             text: "Si el libro es de ficción, presenta una historia y/o temas creíbles. Los personajes, el diálogo, la descripción del lugar, y la trama están desarrollados con la profundidad que permite el formato. Los protagonistas se comportan como personas que podrían existir en la realidad, con virtudes y defectos, y evolucionan a lo largo de la historia. Si el libro es de no ficción, la información que se presenta es correcta y fidedigna. Si se presenta información sobre un hecho o tema polémico, se muestran ambos lados del debate. Las fuentes consultadas y referencias son confiables y se incluyen en el libro. Si corresponde, el libro prioriza fuentes primarias antes que secundarias."
         },
         {

@@ -5,7 +5,7 @@ const hows = [
     },
     {
         title: "Lectura",
-        text: "De todos los libros recibidos, cada reseñador elige 4 cada semana, los lee cuidadosamente la obra y luego los clasifica según distintas categorías (ej. palabras claves, año de publicación, género, etc.)."
+        text: "De todos los libros recibidos, cada reseñador elige 4 cada semana, los lee cuidadosamente y luego los clasifica según distintas categorías (ej. palabras claves, año de publicación, género, etc.)."
     },
     {
         title: "Discusión",

@@ -1,0 +1,61 @@
+.auth-bg {
+     background: #292929 url("../assets/books-bg.svg");
+     width: 50%;
+     min-height: 100vh;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     padding-left: 20px;
+     padding-right: 20px;
+}
+
+.form-container {
+     width: 50%;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+}
+
+.form-container form {
+    display: flex;
+    flex-direction: column;
+}
+
+.auth-container {
+     display: flex;
+     width: 100%;
+}
+
+.login-input {
+     height: 50px;
+     width: 373px;
+     font-family: "Ubuntu";
+     border-radius: 25px;
+     border: none;
+     color: #00000040;
+     font-size: 20px;
+     font-weight: 100;
+     padding-left: 28px;
+     margin: 9px 0;
+     cursor: pointer;
+}
+
+.form-title {
+    margin-bottom: 10px;
+}
+
+.orange-input {
+     background: #fe8f3c;
+}
+
+.red-input {
+     background: #fe4f3c;
+}
+
+.question-span {
+    text-align: right;
+    color: #00000066;
+    font-size: 20px;
+    cursor: pointer;
+    text-decoration: underline;
+}

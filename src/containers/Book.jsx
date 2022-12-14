@@ -1,15 +1,16 @@
 import React, { useState } from 'react'
 import { useParams } from 'react-router'
 import { useQuery } from '@apollo/client'
-import {getBook} from '../graphql/queries'
+import { getBook } from '../graphql/queries'
+import { Link } from 'react-router-dom'
 
 // Logos
 import { ReactComponent as Logos } from '../assets/menu_logos.svg'
 // Images
-import cover1 from '../assets/cover-1.png'
-import cover2 from '../assets/cover-2.png'
-import cover3 from '../assets/cover-3.png'
-import cover4 from '../assets/cover-4.png'
+import { ReactComponent as Aceptable } from '../assets/0.svg'
+import { ReactComponent as Bueno } from '../assets/1.svg'
+import { ReactComponent as MuyBueno } from '../assets/2.svg'
+import { ReactComponent as Extraordinario } from '../assets/3.svg'
 
 // Footer
 import Footer from '../components/Footer'
@@ -17,36 +18,64 @@ import Footer from '../components/Footer'
 // Style
 import '../styles/main.css'
 
-export default function Book () {
-    const [book, setBook] = useState({})
+export default function Book ({
+    setKeywordSearch,
+    setCategorySearch,
+    // keywordSearch,
+    // setKeywordSearch
+}) {
+    const [stageSrc, setStageSrc] = useState()
+    // const backUrl = process.env.REACT_APP_BACK_URL
     const {ISBN} = useParams()
-    const getBooks = async () => {
-        const {loading, error, data} = useQuery(getBook, {
-            variables: {ISBN}
-        })
-        
-        if (loading) return "Loading..."
-        if (error) return "Error :("
 
-        setBook(await data.bookDetail)        
-        return data.bookDetail.name
-    }
-    getBooks()
-    // useEffect(() => {
-    // }, [])
-    console.log(book)
+    const { loading, error, data } = useQuery(getBook, {
+        variables: {ISBN}
+    })
+    if (loading) return 'Loading...'
+    if (error) return `Error! ${error.message}`
+    const book = data.bookDetail
     
-    const score = ['Bueno', 'Muy Bueno', 'Extraordinario']
-    const galleryImgs = [cover1, cover2, cover3, cover4]
-
+    let galleryImgs = [
+        book.imageOne ? book.imageOne : null,
+        book.imageTwo ? book.imageTwo : null,
+        book.imageThree ? book.imageThree : null,
+        book.imageFour ? book.imageFour : null
+    ]
+    
     return (
         <React.Fragment>
             <div className="flex libro">
                 <div className="flex libro-header">
                     <div className="flex libro-top-info">
-                        <p>Autor: Janssen, Mark</p>
-                        <p>Año de publación: 2006</p>
-                        <p>{score[2]}</p>
+                        {book.authors.length !== 0 ?
+                            <p style={{margin: 0}}><span>Autor:</span> {book.authors.length > 1 ?
+                                    book.authors.map(e => 
+                                        {
+                                            return <span key={e}>{e.name} {e.lastName ? e.lastName + ', ' : ''}</span>
+                                        }
+                                    ) :
+                                    book.authors.map(e =>
+                                        {
+                                            return <span key={e}>{e.name} {e.lastName ? e.lastName : ''}</span>
+                                        }
+                                    )
+                                }
+                            </p>
+                        :
+                        null
+                        }
+                        {book.year &&
+                            <p style={{lineHeight: 1, margin: 0}}>Año de publicación: {book.year}</p>
+                        }
+                        <p style={{margin: 0}}>
+                            {
+                                book.score.name === 'Aceptable' ? <Aceptable className='scoreIconSmall' /> :
+                                book.score.name === 'Bueno' ? <Bueno className='scoreIconSmall' /> :
+                                book.score.name === 'Muy bueno' ? <MuyBueno className='scoreIconSmall' /> :
+                                <Extraordinario className='scoreIconSmall' />
+                            }
+                            {book.score.name}
+                        </p>
                     </div>
                     <h2 className="libro-title">
                         {book.name}
@@ -64,44 +93,114 @@ export default function Book () {
                     <div className="libro-gallery flex">
                         <div className="book-gallery-stage flex">
                             <div>
-                                <img src={galleryImgs[1]} alt="" />
-                                <img src={galleryImgs[2]} alt="" />
-                                <img src={galleryImgs[3]} alt="" />
+                                <img onClick={() => setStageSrc(galleryImgs[0])} src={galleryImgs[0]} alt="" />
+                                <img onClick={() => setStageSrc(galleryImgs[1])} src={galleryImgs[1]} alt="" />
+                                <img onClick={() => setStageSrc(galleryImgs[2])} src={galleryImgs[2]} alt="" />
+                                <img onClick={() => setStageSrc(galleryImgs[3])} src={galleryImgs[3]} alt="" />
                             </div>
-                            <img src={galleryImgs[0]} alt="" />
+                            <img src={stageSrc ? stageSrc : galleryImgs[0]} alt="" />
                         </div>
                     </div>
                     <div className="flex libro-info">
                         <div>
                             <h3>Palabras clave</h3>
                             <div className="flex tags">
-                                <p>Monstruos</p>
-                                <p>Naturaleza</p>
-                                <p>Misterio</p>
+                                {book.keyWords.map((e) => {
+                                   return (
+                                        <p key={e.name} className='clickable'>
+                                            <Link
+                                                onClick={() => setKeywordSearch(e.name)}
+                                                to={'/books'}
+                                            >
+                                                {e.name}
+                                            </Link>
+                                        </p>
+                                    )
+                                })
+                                }
                             </div>
                         </div>
                         <div>
-                            <h3>Especificaciones:</h3>
-                            <ul>
-                                <li>ISBN: {book.ISBN}</li>
-                                <li>Año de publicación: </li>
-                                <li>Ancho: {book.width}</li>
-                                <li>Alto: {book.height}</li>
-                                <li>Páginas: {book.pages}</li>
-                                <li>Tipo de encuadernación: </li>
-                                <li>Editorial: </li>
-                                <li>Colección: </li>
-                                <li>Edades: </li>
-                                <li>Autor: </li>
-                                <li>Ilustración: </li>
-                                <li>Ilustrador: </li>
-                            </ul>
+                            <h3>Edades</h3>
+                            <div className="flex tags">
+                                {book.ageRange.map((e) => {
+                                   return (        
+                                        <p key={e.name} className='clickable'>
+                                            <Link
+                                                onClick={() => setCategorySearch(e.name)}
+                                                to={'/books'}
+                                            >
+                                                {e.name}
+                                            </Link>
+                                        </p>
+                                    )
+                                })
+                                }
+                            </div>
                         </div>
                         <div>
-                            <h3>Género literario:</h3>
+                            <h3>Especificaciones</h3>
                             <ul>
-                                <li>Género literario: </li>
-                                <li>Subgénero literario: </li>
+                                <li>ISBN: {book.ISBN}</li>
+                                {book.year &&
+                                    <li>Año de publicación: {book.year}</li>
+                                }
+                                {book.width &&
+                                    <li>Ancho: {book.width}</li>
+                                }
+                                {book.height &&
+                                    <li>Alto: {book.height}</li>
+                                }
+                                {book.pages &&
+                                    <li>Páginas: {book.pages}</li>
+                                }
+                                {book.bookBindings !== 0 ?
+                                    book.bookBindings.length > 1 ?
+                                    <li>Tipo de encuadernación: {book.bookBindings.map(e => e.name + ', ')}</li> :
+                                    <li>Tipo de encuadernación: {book.bookBindings.map(e => e.name)}</li>
+                                :
+                                null
+                                }
+                                {book.editorial &&
+                                    <li>Editorial: {book.editorial.name}</li>
+                                }
+                                {book.collection &&
+                                    <li>Colección: {book.collection.name}</li>
+                                }
+                                {book.authors.length !== 0 ?
+                                    book.authors.length > 1 ?
+                                    <li>Autor: {book.authors.map(e => e.name + ' ' + e.lastName + ', ')}</li> :
+                                    <li>Autor: {book.authors.map(e => e.name + ' ' + e.lastName)}</li>
+                                :
+                                null
+                                }
+                                {book.illustrators.length !== 0 ?
+                                    book.illustrators.length > 1 ?
+                                    <li>Ilustrador: {book.illustrators.map(e => e.name + ' ' + e.lastName + ', ')}</li> :
+                                    <li>Ilustrador: {book.illustrators.map(e => e.name + ' ' + e.lastName)}</li>
+                                :
+                                null
+                                }
+                                {
+                                    book.genre && (
+                                        <li>
+                                            Género literario: {book.genre.name}{
+                                                
+                                                book.subGenres.length !== 0 &&
+                                                    book.subGenres.length > 1 ?
+                                                    ', '
+                                                    :
+                                                    ''
+                                            }
+                                            {book.subGenres.length !== 0 ?
+                                                book.subGenres.length > 1 ?
+                                                book.subGenres.map(e => e.name + ', ') :
+                                                ', ' + book.subGenres.map(e => e.name)
+                                            :
+                                            null}
+                                        </li>
+                                    )
+                                }
                             </ul>
                         </div>
                     </div>

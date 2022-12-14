@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 // Material UI
 import Box from '@mui/material/Box'
@@ -7,51 +7,44 @@ import FormGroup from '@mui/material/FormGroup'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import Checkbox from '@mui/material/Checkbox'
 
-export default function BookBindings() {
-    const [state, setState] = useState({
-        gilad: true,
-        jason: false,
-        antoine: false,
-        jack: false,
-      })
+export default function BookBindings({
+    bookBindingsList,
+    bookBindingsChecked,
+    setBookBindingsChecked
+}) {
+    // const [checked, setChecked] = useState([])
     
-      const handleChange = (event) => {
-        setState({
-          ...state,
-          [event.target.name]: event.target.checked,
-        })
-      }
-    
-      const { gilad, jason, antoine, jack } = state
+    const handleChange = (e) => {
+        if (!bookBindingsChecked.includes(e.target.name)) {
+            setBookBindingsChecked([
+                ...bookBindingsChecked,
+                e.target.name
+            ])
+        } else {
+            const isInArray = (element) => element === e.target.name
+            const elementIndex = bookBindingsChecked.findIndex(isInArray)
+            bookBindingsChecked.splice(elementIndex, 1)
+            setBookBindingsChecked([
+                ...bookBindingsChecked
+            ])
+        }
+    }
 
     return (
         <Box sx={{ width: 300 }}>
             <FormControl sx={{ m: 3 }} component="fieldset" variant="standard">
                 <FormGroup>
-                    <FormControlLabel
-                        control={
-                        <Checkbox checked={gilad} onChange={handleChange} name="gilad" />
-                        }
-                        label="Cartón / Tradicional"
-                    />
-                    <FormControlLabel
-                        control={
-                        <Checkbox checked={jason} onChange={handleChange} name="jason" />
-                        }
-                        label="Cartón / Acordeón"
-                    />
-                    <FormControlLabel
-                        control={
-                        <Checkbox checked={antoine} onChange={handleChange} name="antoine" />
-                        }
-                        label="Papel / Tapa Dura"
-                    />
-                    <FormControlLabel
-                        control={
-                        <Checkbox checked={jack} onChange={handleChange} name="jack" />
-                        }
-                        label="Papel / Tapa Blanda"
-                    />
+                    {bookBindingsList.map((e, i) => {
+                        return (
+                            <FormControlLabel
+                                key={i}
+                                control={
+                                <Checkbox checked={bookBindingsChecked.includes(e.name)} onChange={handleChange} name={e.name} />
+                                }
+                                label={e.name}
+                            />
+                        )
+                    })}
                 </FormGroup>
             </FormControl>
         </Box>

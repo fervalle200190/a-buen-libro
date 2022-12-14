@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 
-// Footer
+    // Components
+import ModalBox from '../components/ModalBox'
+    // Footer
 import Footer from '../components/Footer'
-// Images
+    // Images
 import header from '../assets/us-header.jpg'
 import profilePic from '../assets/profile-pic.png'
     // criteria covers
@@ -21,13 +23,15 @@ import how4 from '../assets/how4.png'
 import how5 from '../assets/how5.png'
 import how6 from '../assets/how6.png'
 import how7 from '../assets/how7.png'
-// Style
+    // Style
 import '../styles/main.css'
-// Data
+    // Data
 import steps from '../libs/stepsTexts'
 import hows from '../libs/how'
 
 export default function Us () {
+    const [isModal, setIsModal] = useState(false)
+    const [criteria, setCriteria] = useState()
     const bkgColors = [
         "#EDEDED",
         "#005293",
@@ -40,6 +44,10 @@ export default function Us () {
     const coverImgs = [one,two,three,four,five,six,seven]
     const howIcons = [how1, how2, how3, how4, how5, how5, how6, how7]
     let count = 1
+
+    const showModal = () => {
+        setIsModal(!isModal)
+    }
 
     const renderSteps = () => {
         let step
@@ -73,7 +81,11 @@ export default function Us () {
                     </div>
                     <div className="criterio-imgs">
                         <img src={coverImgs[i]} />
-                        <button>
+                        <button onClick={() => {
+                            showModal()
+                            setCriteria("crit"+(i+1))
+                            
+                            }}>
                             Ver ejemplos
                         </button>
                     </div>
@@ -106,6 +118,12 @@ export default function Us () {
 
     return (
             <div>
+                {isModal &&
+                    <ModalBox
+                        showModal={showModal}
+                        criteria={criteria}
+                    />
+                }
                 <header
                     className="us-header flex jus-algn-center bkg-img"
                     style={{backgroundImage: `url(${header})`}}
@@ -116,7 +134,7 @@ export default function Us () {
                     </div>
                 </header>
                 <div className="container us-subtext">
-                    <p>Para criticar las obras, leemos cuidadosamente cada una y usamos criterios objetivos de calidad para juzgar su mérito literario y su aporte al campo de la literatura infantil y juvenil. Nuestro uso de los criterios es flexible: algunos criterios no son aplicables a todos las obras, por eso hay libros que calificamos como extraordinarios a pesar de que no cumplen todos los criterios.</p>
+                    <p>Para criticar las obras, leemos cuidadosamente cada una y usamos criterios objetivos de calidad para juzgar su mérito literario y su aporte al campo de la literatura infantil y juvenil. Nuestro uso de los criterios es flexible: algunos criterios no son aplicables a todas las obras, por eso hay libros que calificamos como extraordinarios a pesar de que no cumplen todos los criterios.</p>
                 </div>
                 {renderSteps()}
                 <div className="hows">

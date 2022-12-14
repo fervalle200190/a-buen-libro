@@ -1,61 +1,52 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import './index.css'
-import App from './App'
-import reportWebVitals from './reportWebVitals'
+import React from "react"
+import ReactDOM from "react-dom"
+import "./index.css"
+import App from "./App"
+import reportWebVitals from "./reportWebVitals"
 
 import {
-  ApolloClient,
-  InMemoryCache,
-  ApolloProvider,
-  // useQuery,
-  // gql,
-  HttpLink,
-  from,
-} from '@apollo/client'
-import {onError} from '@apollo/client/link/error'
+     ApolloClient,
+     InMemoryCache,
+     ApolloProvider,
+     // useQuery,
+     // gql,
+     HttpLink,
+     from,
+} from "@apollo/client"
+import { onError } from "@apollo/client/link/error"
+import { BrowserRouter as Router } from "react-router-dom"
 
-const errorLink = onError (({ graphqlErrors }) => {
-  if (graphqlErrors) {
-    graphqlErrors.map(({message}) => {
-      alert(`Graphql error ${message}`)
-    })
-  }
+const errorLink = onError(({ graphqlErrors }) => {
+     if (graphqlErrors) {
+          graphqlErrors.map(({ message }) => {
+               alert(`Graphql error ${message}`)
+          })
+     }
 })
 const link = from([
-  errorLink,
-  new HttpLink({uri: 'http://127.0.0.1:8000/graphql', withCredentials: true})
+     errorLink,
+     new HttpLink({ uri: "https://www.abuenlibro.cl/api/graphql", withCredentials: true }),
+     // new HttpLink({uri: 'http://localhost:8000/api/graphql', withCredentials: true})
 ])
 
 const client = new ApolloClient({
-  // uri: 'http://localhost:8000/graphql',
-  cache: new InMemoryCache(),
-  link: link,
-  fetchOptions: {
-    mode: 'no-cors',
-  },
+     cache: new InMemoryCache(),
+     link: link,
+     fetchOptions: {
+          mode: "no-cors",
+     },
+     addTypename: false,
 })
 
-// client.query({
-//   query: gql`
-//     query bookDetail {
-//       bookDetail(ISBN: 9789563642384) {
-//         ISBN,
-//         name
-//       }
-//     }
-//   `
-// })
-// .then(result => console.log(result.data.bookDetail))
-
-
 ReactDOM.render(
-  <React.StrictMode>
-    <ApolloProvider client={client}>
-      <App />
-    </ApolloProvider>
-  </React.StrictMode>,
-  document.getElementById('root')
+     <React.StrictMode>
+          <Router>
+               <ApolloProvider client={client}>
+                    <App />
+               </ApolloProvider>
+          </Router>
+     </React.StrictMode>,
+     document.getElementById("root")
 )
 
 // If you want to start measuring performance in your app, pass a function

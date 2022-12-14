@@ -1,9 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
-
-* {
-  box-sizing: border-box;
-}
-
+/* @import url('https://fonts.googleapis.com/css2?family=Lato&display=swap'); */
 body {
   margin: 0;
   font-family: 'Lato', sans-serif;
@@ -13,6 +8,11 @@ body {
 
 h1,h2,h3 {
   font-family: 'Ubuntu', sans-serif;
+}
+
+
+* {
+  box-sizing: border-box;
 }
 
 code {
