@@ -1,12 +1,32 @@
-import React, { useState } from "react"
-import { Link } from "react-router-dom"
+import React, { useContext, useState } from "react"
+import { Link, useLocation, useNavigate } from "react-router-dom"
 
 import { ReactComponent as Logo } from "../assets/menu_logos.svg"
-import { ReactComponent as Lupa } from "../assets/lupa.svg"
 import "../styles/menu.css"
+import { AuthContext } from "../auth"
+import { MenuSearchBar } from "./MenuSearchBar"
 
 export default function Menu() {
      const [isOpen, setIsOpen] = useState(false)
+     const { state, onLogout } = useContext(AuthContext)
+     const navigate = useNavigate()
+     const location = useLocation()
+
+     const admin = location.pathname.includes('/admin/')
+
+     const onLogoutClick = () => {
+          localStorage.removeItem("bookUser")
+          onLogout()
+          // navigate('/')
+     }
+
+     const onLoginClick = () => {
+          navigate(`auth/ingresar/log`)
+     }
+
+     const onAdminCLick = ()=> {
+          navigate(`/admin/user`)
+     }
 
      return (
           <React.Fragment>
@@ -22,14 +42,7 @@ export default function Menu() {
                </Link>
                <ul className={!isOpen ? "menu" : "menu menu-show"}>
                     <li>
-                         <div className='input-search-container'>
-                              <Lupa className="menu-lupa" />
-                              <input
-                                   type='search'
-                                   className='input-search-menu'
-                                   placeholder='Busca un libro'
-                              />
-                         </div>
+                         <MenuSearchBar />
                     </li>
                     <li>
                          <Link onClick={() => setIsOpen(!isOpen)} to='/'>
@@ -46,6 +59,13 @@ export default function Menu() {
                               Nosotros
                          </Link>
                     </li>
+                    {!state.logged ? (
+                         <li onClick={onLoginClick}>inicia sesion</li>
+                    ) : admin ? (
+                         <li onClick={onLogoutClick}>cerrar sesion</li>
+                    ) : (
+                         <li onClick={onAdminCLick}>Administrador</li>
+                    )}
                </ul>
           </React.Fragment>
      )

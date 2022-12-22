@@ -6,7 +6,7 @@ import { ReactComponent as MuyBueno } from "../assets/2.svg"
 import { ReactComponent as Extraordinario } from "../assets/3.svg"
 import plusIcon from "../assets/plus-icon.png"
 
-export default function BookCard({ imgSrc, ISBN, authors, bookName, score }) {
+export default function BookCard({ imgSrc, ISBN, authors, bookName, score }) { 
      const navigate = useNavigate()
      // const backUrl = process.env.REACT_APP_BACK_URL
      return (

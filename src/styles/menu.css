@@ -101,7 +101,7 @@
      border: none;
      font-size: 12px;
      font-family: inherit;
-     padding-left: 60px;
+     padding-left: 135px;
      cursor: pointer;
      transition: all 0.2s ease-in-out;
 }
@@ -123,4 +123,98 @@
      top: 50%;
      left: 25px;
      transform: translate(0, -50%);
+}
+
+.inner-select {
+     position: absolute;
+     top: 0;
+}
+
+.inner-select-label {
+     height: 44px;
+     display: flex;
+     align-items: center;
+     padding-left: 50px;
+}
+
+.border-select {
+     display: flex;
+     width: 73px;
+     height: 70%;
+     align-items: center;
+     gap: 4px;
+     cursor: pointer;
+     border-right: 1px solid #000000;
+}
+
+.search-selector {
+     font-size: 12px;
+     font-family: "Ubuntu";
+     color: rgba(0, 0, 0, 0.671);
+}
+
+.arrow-down-select {
+     margin-right: 9px;
+     width: 12px;
+}
+
+.list-search-selector {
+     position: relative;
+     top: -3px;
+     left: 43px;
+     padding-left: 7px;
+     font-size: 12px;
+     color: #00000080;
+     background-color: #fff;
+     padding-bottom: 8px;
+     display: block;
+     z-index: 50;
+     box-shadow: 0 5px 6px rgba(0, 0, 0, 0.185);
+}
+
+.hidden-selector {
+     display: none;
+}
+
+.list-option {
+     margin: 3px 0;
+     cursor: pointer;
+}
+
+.search-results {
+     position: absolute;
+     top: 50px;
+     width: 291px;
+     height: 180px;
+     background: #fff;
+     color: #000000;
+     overflow-y: auto;
+     border-radius: 10px;
+     box-shadow: 0 0 14px rgba(0, 0, 0, 0.308);
+}
+
+.item-result {
+     display: flex;
+     align-items: center;
+     gap: 4px;
+     margin-bottom: 8px;
+     cursor: pointer;
+}
+
+.item-result-img {
+     width: 60px;
+}
+
+.book-result-name {
+     font-family: "Ubuntu";
+     font-size: 12px;
+}
+
+.hidden-results {
+     display: none;
+}
+
+.search-message {
+     text-align: center;
+     font-family: "Ubuntu";
 }

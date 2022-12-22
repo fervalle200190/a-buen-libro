@@ -15,6 +15,9 @@ import {
 } from "@apollo/client"
 import { onError } from "@apollo/client/link/error"
 import { BrowserRouter as Router } from "react-router-dom"
+import { AuthProvider } from "./auth"
+import { SnackbarProvider } from "notistack"
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 
 const errorLink = onError(({ graphqlErrors }) => {
      if (graphqlErrors) {
@@ -38,12 +41,20 @@ const client = new ApolloClient({
      addTypename: false,
 })
 
+const queryClient = new QueryClient()
+
 ReactDOM.render(
      <React.StrictMode>
           <Router>
-               <ApolloProvider client={client}>
-                    <App />
-               </ApolloProvider>
+               <AuthProvider>
+                    <QueryClientProvider client={queryClient}>
+                         <ApolloProvider client={client}>
+                              <SnackbarProvider maxSnack={10}>
+                                   <App />
+                              </SnackbarProvider>
+                         </ApolloProvider>
+                    </QueryClientProvider>
+               </AuthProvider>
           </Router>
      </React.StrictMode>,
      document.getElementById("root")
