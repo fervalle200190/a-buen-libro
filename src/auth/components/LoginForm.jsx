@@ -45,7 +45,8 @@ export const LoginForm = () => {
           const password = getValues('password')
           localStorage.setItem("bookUser", JSON.stringify({...data.userLogin, password}))
           onLogin({...data.userLogin, password })
-          navigate(`/admin/user/upload`)
+          if(data.userLogin.isSuperuser) return navigate(`/admin/user/upload`)
+          navigate(`/admin/user`)
      }, [data])
 
      useEffect(() => {

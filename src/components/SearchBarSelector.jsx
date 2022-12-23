@@ -17,7 +17,7 @@ export const SearchBarSelector = ({ list, tagSelected, onTagSelectedChanged }) =
 
      useEffect(() => {
           const checkClick = (e) => {
-               if (!option.current.contains(e.target)) {
+               if (option.current && !option.current.contains(e.target)) {
                     onCloseList()
                }
           }

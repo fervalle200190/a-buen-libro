@@ -15,6 +15,7 @@ export const UploadBooks = () => {
      }
 
      useEffect(() => {
+          if(uploadFiles.length <= 0) return
           const postFiles = async () => {
                const formData = new FormData()
                formData.append("file", uploadFiles[0])
@@ -45,7 +46,7 @@ export const UploadBooks = () => {
                     <div className='flex-drag'>
                          <div className='drag-and-drop-container'>
                               <img src={UploadIcon} alt='upload' className='upload-icon' />
-                              <Box sx={{ width: "243px" }}>
+                              <Box sx={{ width: {sm: "243px", xs: 'auto'}, pl: {xs: 2, sm: 0} }}>
                                    Puedes arrastrar el documento aquí o buscar el documento
                               </Box>
                          </div>

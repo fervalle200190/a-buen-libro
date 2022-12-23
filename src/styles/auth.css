@@ -32,12 +32,16 @@
      font-family: "Ubuntu";
      border-radius: 25px !important;
      border: none;
-     color: #00000077;
+     color: #fff;
      font-size: 20px;
      font-weight: 100;
      padding-left: 28px;
      margin: 9px 0;
      cursor: pointer;
+}
+
+.login-input::placeholder {
+     color: #00000077;
 }
 
 .form-title {
@@ -183,7 +187,7 @@
 .error-message {
      background: #c42800;
      color: #fff;
-     font-family: 'Ubuntu';
+     font-family: "Ubuntu";
      border-radius: 10px;
      padding-left: 10px;
      font-size: 13px;

@@ -9,5 +9,5 @@ export const AdminPage = () => {
           state: { user, logged },
      } = useContext(AuthContext)
      if(!logged) return <Navigate to={'/'} />
-     return user.isSuperUser ? <SuperUserPage /> : <UserPage />
+     return user.isSuperuser ? <SuperUserPage /> : <UserPage />
 }

@@ -14,7 +14,7 @@ export const SearchResults = ({ value, searchQuery }) => {
 
      useEffect(() => {
           const checkClick = (e) => {
-               if (!results.current.contains(e.target)) {
+               if (results.current && !results.current.contains(e.target)) {
                     setShowResults(false)
                }
           }

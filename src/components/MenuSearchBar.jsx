@@ -4,23 +4,9 @@ import { useNavigate } from "react-router-dom"
 import { useDebounce } from "use-debounce"
 import { ReactComponent as Lupa } from "../assets/lupa.svg"
 import { searchBooks } from "../graphql/queries"
+import { tagSelectors } from "../utils"
 import { SearchBarSelector } from "./SearchBarSelector"
 import { SearchResults } from "./SearchResults"
-
-const tagSelectors = [
-     {
-          label: "Nombre",
-          fn: (value) => ({ name: value }),
-     },
-     {
-          label: "Genero",
-          fn: (value) => ({ genre: [value] }),
-     },
-     {
-          label: "Rango de edad",
-          fn: (value) => ({ ageRange: [value] }),
-     },
-]
 
 export const MenuSearchBar = () => {
      const [tagSelected, setTagSelected] = useState(tagSelectors[0])

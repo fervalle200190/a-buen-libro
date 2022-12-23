@@ -6,10 +6,10 @@ import { SideAdminBar, Upload, Users } from "../components"
 export const SuperUserPage = () => {
      return (
           <Grid container sx={{ pt: 14, pb: 14 }}>
-               <Grid item xs={2} pt={5} sx={{ borderRight: "1px solid #000", height: "400px" }}>
+               <Grid item md={2} xs={5} pt={5} sx={{ borderRight: "1px solid #000", height: "400px" }}>
                     <SideAdminBar />
                </Grid>
-               <Grid item xs={10} pl={8} pt={5}>
+               <Grid item md={10} xs={7} pt={5} sx={{pl: {md: 8, xs: 2}}}>
                     <Routes>
                          <Route path='/upload' element={<Upload />} />
                          <Route path='/manage-users' element={<Users />} />

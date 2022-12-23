@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useMemo, useState } from "react"
 import { useParams } from "react-router"
-import { useMutation, useQuery } from "@apollo/client"
+import { useLazyQuery, useMutation, useQuery } from "@apollo/client"
 import { createBookShelf, deleteBook, getBook, checkBook } from "../graphql/queries"
 import { Link } from "react-router-dom"
 
@@ -34,8 +34,8 @@ export default function Book({
      const { loading, error, data } = useQuery(getBook, {
           variables: { ISBN },
      })
-     const { data: booksOnShelf, refetch } = useQuery(checkBook, {
-          variables: { user: state.user.id, book: ISBN },
+     const [checkHeart, { data: booksOnShelf, refetch }] = useLazyQuery(checkBook, {
+          variables: { user: state?.user?.id, book: ISBN },
           fetchPolicy: "network-only",
      })
      const [postBook, { data: bookShelf }] = useMutation(createBookShelf)
@@ -47,6 +47,12 @@ export default function Book({
      }, [booksOnShelf])
 
      useEffect(() => {
+          if (!state.logged) return
+          checkHeart()
+     }, [state.logged])
+
+     useEffect(() => {
+          if (!state.logged) return
           refetch()
      }, [bookShelf, deletedBook])
 

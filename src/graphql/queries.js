@@ -171,11 +171,13 @@ export const loginUser = gql`
 `
 
 export const searchBooks = gql`
-     query bookSearch($name: String, $genre: [String], $ageRange: [String]) {
+     query bookSearch($name: String, $genre: [String], $ageRange: [String], $authorsNames: [String], $startYear: Int) {
           bookSearch(
                genre: $genre
                ageRange: $ageRange
                name: $name
+               authorsNames: $authorsNames
+               startYear: $startYear
           ) {
                pages
                books {

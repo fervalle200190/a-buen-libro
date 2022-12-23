@@ -9,8 +9,9 @@ export const useUploadForm = (url) => {
      const uploadForm = async (formData) => {
           const { data: resData } = await axios.post(url, formData, {
                headers: {
-                    "Content-Type": "multipart/form-data",
+                    "Content-Type": "application/json",
                },
+               withCredentials: true,
                onUploadProgress: (progressEvent) => {
                     const progress = (progressEvent.loaded / progressEvent.total) * 50
                     setProgress(progress)

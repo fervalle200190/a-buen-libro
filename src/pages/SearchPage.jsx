@@ -4,21 +4,7 @@ import React, { useMemo } from "react"
 import { useLocation } from "react-router-dom"
 import BookCard from "../components/BookCard"
 import { searchBooks } from "../graphql/queries"
-
-const tagSelectors = [
-     {
-          label: "Nombre",
-          fn: (value) => ({ name: value }),
-     },
-     {
-          label: "Genero",
-          fn: (value) => ({ genre: [value] }),
-     },
-     {
-          label: "Rango de edad",
-          fn: (value) => ({ ageRange: [value] }),
-     },
-]
+import { tagSelectors } from "../utils"
 
 export const SearchPage = () => {
      const location = useLocation()

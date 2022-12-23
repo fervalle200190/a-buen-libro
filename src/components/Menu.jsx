@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react"
-import { Link, useLocation, useNavigate } from "react-router-dom"
+import { Link, useLocation } from "react-router-dom"
 
 import { ReactComponent as Logo } from "../assets/menu_logos.svg"
 import "../styles/menu.css"
@@ -9,23 +9,15 @@ import { MenuSearchBar } from "./MenuSearchBar"
 export default function Menu() {
      const [isOpen, setIsOpen] = useState(false)
      const { state, onLogout } = useContext(AuthContext)
-     const navigate = useNavigate()
      const location = useLocation()
 
-     const admin = location.pathname.includes('/admin/')
+     const admin = location.pathname.includes("/admin/")
+     const isSuperuser = state.logged ? state.user.isSuperuser : false
 
      const onLogoutClick = () => {
           localStorage.removeItem("bookUser")
           onLogout()
           // navigate('/')
-     }
-
-     const onLoginClick = () => {
-          navigate(`auth/ingresar/log`)
-     }
-
-     const onAdminCLick = ()=> {
-          navigate(`/admin/user`)
      }
 
      return (
@@ -59,13 +51,25 @@ export default function Menu() {
                               Nosotros
                          </Link>
                     </li>
-                    {!state.logged ? (
-                         <li onClick={onLoginClick}>inicia sesion</li>
-                    ) : admin ? (
-                         <li onClick={onLogoutClick}>cerrar sesion</li>
-                    ) : (
-                         <li onClick={onAdminCLick}>Administrador</li>
-                    )}
+                    <li style={{ cursor: "pointer" }}>
+                         {!state.logged ? (
+                              <>
+                                   <Link to={"/auth/ingresar/log"} style={{ marginRight: "5px" }}>
+                                        Inicia sesión
+                                   </Link>
+                                   /
+                                   <Link to={"/auth/registrarse/log"} style={{ marginLeft: "5px" }}>
+                                        Registrarse
+                                   </Link>
+                              </>
+                         ) : admin ? (
+                              <p onClick={onLogoutClick}>Cerrar sesión</p>
+                         ) : isSuperuser ? (
+                              <Link to={"/admin/user/upload"}>Administrador</Link>
+                         ) : (
+                              <Link to={"/admin/user/"}>Mi repisa</Link>
+                         )}
+                    </li>
                </ul>
           </React.Fragment>
      )
